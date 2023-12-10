@@ -1,0 +1,225 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'bisapp/images/PAMAHALAAN.jpg' %}");
+            background-position: center;
+            min-height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-size: 18px;
+            -webkit-overflow-scrolling: touch;
+            touch-action: manipulation;
+            font-family: 'poppins';
+        }
+
+        .log {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 400px;
+            background: white;
+            border-radius: 30px;
+            margin-top: 20px;
+        }
+
+        .log h1 {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid transparent;
+        }
+
+        .log form {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .txt_field {
+            position: relative;
+            border-bottom: 2px solid black;
+            margin: 30px 0;
+        }
+
+        .txt_field input {
+            width: 100%;
+            padding: 0 5px;
+            height: 40px;
+            font-size: 16px;
+            border: none;
+            background: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .txt_field label {
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            color: #adadad;
+            transform: translateY(-50%);
+            font-size: 12px;
+            transition: .5s;
+        }
+
+        .txt_field span::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #2691d9;
+            transition: .5s;
+        }
+
+        .txt_field input:focus ~ label,
+        .txt_field input:valid ~ label {
+            top: -2px;
+            color: #2691d9;
+        }
+
+        .txt_field input:focus ~ span::before,
+        .txt_field input:valid ~ span::before {
+            width: 100%;
+        }
+
+        .pass {
+            margin: 3% 0;
+            color: #a6a6a6;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .pass:hover {
+            text-decoration: underline;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            height: 50px;
+            border: 1px solid;
+            background: #2691d9;
+            border-radius: 25px;
+            font-size: 18px;
+            color: #e9f4fb;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+            margin-bottom: 5%;
+        }
+
+        input[type="submit"]:hover {
+            border-color: #2691d9;
+            transition: .5s;
+        }
+
+        .logo img {
+            width: 80%;
+            max-width: 150px;
+            height: auto;
+            font-size: 15;
+            margin: 0 auto;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .ExistingAccount {
+            margin: 5% 0;
+            text-align: center;
+            font-size: 16px;
+            color: #666666;
+        }
+
+        .ExistingAccount a {
+            font-weight: bold;
+            font-size: 12px;
+            color: black;
+            text-decoration: none;
+        }
+
+        .ExistingAccount a:hover {
+            text-decoration: underline;
+        }
+
+        .success-banner {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .error-banner {
+            background-color: #f44336;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .log {
+                width: 90%;
+            }
+
+            .txt_field input {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+<body>
+
+<div class="log">
+    <div class="logo">
+        <h1><a href=""> <img src="{% static 'bisapp/images/logo1.png' %}" alt="logo1"></a></h1>
+        <p>BARANGAY INFORMATION SYSTEM</p>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="success-banner">
+                        {{ message }}
+                    </div>
+                {% elif message.tags == 'error' %}
+                    <div class="error-banner">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <form method="post" action="">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="txt_field">
+                {{ field }}
+                <span></span>
+                <label>{{ field.label }}</label>
+            </div>
+        {% endfor %}
+
+        <input type="submit" id="signupButton" value="Sign-Up">
+
+        <div class="ExistingAccount">
+            <a href="{% url 'signin' %}">ALREADY HAVE AN ACCOUNT?</a>
+        </div>
+    </form>
+</div>
+
+</body

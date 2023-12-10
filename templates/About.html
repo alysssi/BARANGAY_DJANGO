@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>About Us</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .header {
+            background-image: url("{% static 'bisapp/images/cieloing.png' %}");
+            background-size: cover;
+            background-color: #fdfdfd;
+            overflow: hidden;
+            padding: 100px 0;
+        }
+
+        .container {
+            margin:0 auto;
+            width: 55%;
+            float: center;
+            background-color: #fdfdfd;
+            padding: 150px;
+        }
+
+        .container h1 {
+            margin-bottom: 30px;
+            font-size: 30px;
+            font-weight: 900;
+        }
+
+        .text {
+            font-size: 13px;
+            color: #545454;
+            line-height: 30px;
+            text-align: justify;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .logo img {
+            margin-top: -80px;
+            margin-bottom: 100px;
+            float: left;
+            margin-left: 70px;
+            width: 80px;
+            height: auto;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .logo img {
+                width: 60px;
+            }
+
+            .logo h1 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <header>
+            <div class="mainlogo">
+                <div class="logo">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'bisapp/images/logo1.png' %}" alt="logo1">
+                    </a>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            <h1>About Us</h1>
+            <p class="text">
+                The Barangay Information System (BIS) project is designed to bring a modern and efficient approach to the
+                way our barangay operates. Our goal is to introduce an integrated digital platform that will simplify
+                and streamline various aspects of our community's functions. With this system, we aim to improve
+                communication, data management, and decision-making processes, ultimately benefiting the entire community.
+                By embracing this advanced technology, our intention is to establish a more efficient, transparent, and
+                citizen-focused administration within our barangay. This project will enable us to serve our residents
+                better, ensuring that their needs and concerns are met promptly and effectively.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

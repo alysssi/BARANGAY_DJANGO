@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USER</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="{% static  'bisapp/UserUI.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="{% static 'bisapp/images/logo1.png' %}" alt="">
+                    <h2>Barangay Information System</h2>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="#" onclick="loadContent('home.html');">
+                    <span class="material-icons-sharp">grid_view </span>
+                    <h3>Home</h3>
+                </a>
+                <a href="#" onclick="loadContent('request.html');">
+                    <span class="material-icons-sharp">request_page </span>
+                    <h3>Requests</h3>
+                </a>
+                <a href="#" onclick="loadContent('report.html');">
+                    <span class="material-icons-sharp">request_page </span>
+                    <h3>Report</h3>
+                    <a href="{% url 'profile' %}" >
+                        <span class="material-icons-sharp">settings </span>
+                        <h3>Settings</h3>
+                    </a>
+                    <a href="{% url 'logout' %}">
+                        <span class="material-icons-sharp">logout </span>
+                        <h3>LogOut</h3>
+                    </a>
+            </div>
+        </aside>
+
+        <div id="content-container">
+
+
+            <script>
+                function loadContent(page) {
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("content-container").innerHTML = this.responseText;
+                        }
+                    };
+            
+                    var url;
+                    if (page === 'request.html') {
+                        url = "{% url 'request' %}?page=" + page;
+                    } else if (page === 'report.html') {
+                        url = "{% url 'report' %}?page=" + page;
+                    } 
+                    
+        
+                    xhttp.open("GET", url, true);
+                    xhttp.send();
+                }
+            </script>
+
+        </div>
+        
+        <div class="right">
+            <div class="top">
+                <div class="profile" method="post" action="UserUI.php">
+                    <strong class="text-muted">{{ first_name }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

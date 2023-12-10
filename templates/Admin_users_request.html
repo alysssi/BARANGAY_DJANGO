@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User and Document Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        select, input[type="submit"] {
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>DOCUMENT REQUEST HISTORY</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Document Type</th>
+                <th>Delivery Date</th>
+                <th>Payment Type</th>
+                <th>Purpose</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="data-table-body">
+            {% for document in documents %}
+                <tr>
+                    <td>{{ document.user.email }}</td>
+                    <td>{{ document.document_type }}</td>
+                    <td>{{ document.delivery_date }}</td>
+                    <td>{{ document.payment_type }}</td>
+                    <td>{{ document.purpose }}</td>
+                    <td>{{ document.status }}</td>
+                    <td>
+                        <form method='post' action="{% url 'admin_users_request' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="document_id" value="{{ document.id }}">
+                            <select name='new_status'>
+                                <option value='Pending' {% if document.status == 'Pending' %}selected{% endif %}>Pending</option>
+                                <option value='Ready' {% if document.status == 'Ready' %}selected{% endif %}>Ready</option>
+                                <option value='Claimed' {% if document.status == 'Claimed' %}selected{% endif %}>Claimed</option>
+                            </select>
+                            <input type='submit' value='Update Status'>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+
+</html>

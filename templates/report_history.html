@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'AdminUI.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+        body {
+            background-image: url(image/update\ profile.png);
+            font-family: 'poppins', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            margin-top: 90px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 25px;
+            text-align: center;
+            font-family: 'poppins', sans-serif;
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+    <title>Document History</title>
+</head>
+
+<body>
+    <form method="post" action="{% url 'report_history' %}">
+        <a class="btn btn-primary mb-4" href="{% url 'main' %}">Back</a>
+
+        <h1> Document History</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Reporter's Name</th>
+                    <th>Date of Incident</th>
+                    <th>Incident Type</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if result %}
+                    {% for row in result %}
+                        <tr>
+                            <td>{{ row.resident_name }}</td>
+                            <td>{{ row.incident_date }}</td>
+                            <td>{{ row.incident_type }}</td>
+                            <td>{{ row.description }}</td>
+                            <td>{{ row.status }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan='5'>No documents found for the resident.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <br>
+    </form>
+</body>
+
+</html>

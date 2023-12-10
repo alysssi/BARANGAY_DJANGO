@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profiles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 50px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>USER PROFILES</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Middle Name</th>
+                <th>Extension Name</th>
+                <th>Birthdate </th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Gender</th>
+               
+            </tr>
+        </thead>
+        <tbody id="data-table-body">
+            {% for profile in user_profiles %}
+                <tr>
+                    <td>{{ profile.user }}</td>
+                    <td>{{ profile.first_name }}</td>
+                    <td>{{ profile.last_name }}</td>
+                    <td>{{ profile.middle_name }}</td>
+                    <td>{{ profile.extension }}</td>
+                    <td>{{ profile.birthdate }}</td>
+                    <td>{{ profile.phone_number }}</td>
+                    <td>{{ profile.email }}</td>
+                    <td>{{ profile.address }}</td>
+                    <td>{{ profile.gender }}</td>
+                  
+                </tr>
+            {% empty %}
+                <tr><td colspan="3">No data found</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+
+</html>

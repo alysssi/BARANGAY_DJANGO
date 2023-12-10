@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  header {
+    margin: 0;
+    padding: 0;
+    background-image: url("{% static 'bisapp/images/events.png' %}");
+    background-position: center;
+    min-height: 120vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+  
+  }
+  
+  .logo img {
+    width: 80px;
+    max-width: 100%;
+    margin-right: auto; 
+  }
+  
+  @media screen and (max-width: 768px) {
+    header {
+      padding: 10px; 
+    }
+  
+    .logo img {
+      width: 50px; 
+    }
+  }
+  
+    </style>
+    <title>Contact US</title>
+</head>
+<body>
+
+       
+        <div class = "mainheader">
+
+            <header>
+          <div class = "mainlogo">
+    
+            <div class = "logo">
+    
+              <a href="{% url 'home' %}"><img src="{% static 'bisapp/images/logo1.png' %}" alt="">
+    
+                </a>
+    
+          </div>
+
+
+          <style>
+
+
+
+          </style>
+
+     
+
+
+        
+    
+
+
+
+    
+</body>
+</html>

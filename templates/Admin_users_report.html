@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User and Resident Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 50px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            margin-top: 65px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table>
+        <thead>
+            <h1>REPORT</h1>
+            <tr>
+                <th>User</th>
+                <th>Reporter ID</th>
+                <th>Reporter Name</th>
+                <th>Incident Date</th>
+                <th>Report Date</th>
+                <th>Incident Type</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="data-table-body">
+            {% for row in result %}
+                <tr>
+                    <td>{{ row.user }}</td>
+                    <td>{{ row.reporter_id }}</td>
+                    <td>{{ row.resident_name }}</td>
+                    <td>{{ row.incident_date }}</td>
+                    <td>{{ row.report_date }}</td>
+                    <td>{{ row.incident_type }}</td>
+                    <td>{{ row.description }}</td>
+                    <td>{{ row.status }}</td>
+                    <td>
+                        <form method='post' action="{% url 'admin_users_report' %}">
+                            {% csrf_token %}
+                            <input type='hidden' name='reporter_id' value='{{ row.reporter_id }}'>
+                            
+                         
+                            <label for="new_status">Select Status:</label>
+                            <select name='new_status' id="new_status">
+                                <option value='Under Review' {% if row.status == 'Under Review' %}selected{% endif %}>Under Review</option>
+                                <option value='Recorded' {% if row.status == 'Recorded' %}selected{% endif %}>Recorded</option>
+                                <option value='Resolved' {% if row.status == 'Resolved' %}selected{% endif %}>Resolved</option>
+                            </select>
+                        
+                          
+                            <input type='submit' name='update_status' value='Update'>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr><td colspan='10'>No data found</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
